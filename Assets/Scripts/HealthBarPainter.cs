@@ -12,12 +12,12 @@ public class HealthBarPainter : MonoBehaviour
     [SerializeField] private TMP_Text _hitPointsValue;
 
     private float _updateBarSpeed = 1f;
-    private Slider _scale;
+    private Slider _slider;
     private Coroutine _healthBarUpdate;
 
     private void Start()
     {
-        _scale = GetComponent<Slider>();
+        _slider = GetComponent<Slider>();
 
         UpdateBar();
     }
@@ -46,12 +46,14 @@ public class HealthBarPainter : MonoBehaviour
     private IEnumerator PaintBar()
     {
         int health = _player.Health;
+        float delayValue = 0.015f;
+        var delay = new WaitForSeconds(delayValue);
 
-        while (_scale.value != health)
+        while (_slider.value != health)
         {
-            _scale.value = Mathf.MoveTowards(_scale.value, health, _updateBarSpeed);
+            _slider.value = Mathf.MoveTowards(_slider.value, health, _updateBarSpeed);
 
-            yield return new WaitForSeconds(0.015f);
+            yield return delay;
         }
     }
 }
