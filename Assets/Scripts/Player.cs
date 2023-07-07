@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
     [SerializeField] private HealthBarPainter _painter;
-    [SerializeField]private UnityEvent _healthIsChanged;
+    [SerializeField] private UnityEvent _healthChanged;
 
     private int _healValue = 10;
     private int _minDamage = 1;
@@ -22,27 +22,13 @@ public class Player : MonoBehaviour
     public int Health { get; private set; }
     public int MaxHealth { get; private set; }
 
-    public event UnityAction HealthIsChanged
+    public event UnityAction HealthChanged
     {
-        add => _healthIsChanged.AddListener(value);
-        remove => _healthIsChanged.RemoveListener(value);
+        add => _healthChanged.AddListener(value);
+        remove => _healthChanged.RemoveListener(value);
     }
 
     public void TakeDamage()
-    {
-        StartCoroutine(TakeDamageCoroutine());
-        StopCoroutine(TakeDamageCoroutine());
-        _healthIsChanged?.Invoke();
-    }
-
-    public void TakeHeal()
-    {
-        StartCoroutine(TakeHealCoroutine());
-        StopCoroutine(TakeHealCoroutine());
-        _healthIsChanged?.Invoke();
-    }
-
-    private IEnumerator TakeDamageCoroutine()
     {
         int damage = _enemy.GetDamageValue();
 
@@ -56,10 +42,10 @@ public class Player : MonoBehaviour
             Health = 0;
         }
 
-        yield return new WaitForSeconds(1f);
+        _healthChanged?.Invoke();
     }
 
-    private IEnumerator TakeHealCoroutine()
+    public void TakeHeal()
     {
         if (_healValue <= 0)
             Health += _minHealValue;
@@ -69,6 +55,6 @@ public class Player : MonoBehaviour
         if (Health > MaxHealth)
             Health = MaxHealth;
 
-        yield return new WaitForSeconds(1f);
+        _healthChanged?.Invoke();
     }
 }

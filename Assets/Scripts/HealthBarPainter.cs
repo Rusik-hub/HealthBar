@@ -13,6 +13,7 @@ public class HealthBarPainter : MonoBehaviour
 
     private float _updateBarSpeed = 1f;
     private Slider _scale;
+    private Coroutine _healthBarUpdate;
 
     private void Start()
     {
@@ -23,18 +24,22 @@ public class HealthBarPainter : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.HealthIsChanged += UpdateBar;
+        _player.HealthChanged += UpdateBar;
     }
 
     private void OnDisable()
     {
-        _player.HealthIsChanged -= UpdateBar;
+        _player.HealthChanged -= UpdateBar;
     }
 
     public void UpdateBar()
     {
-        StartCoroutine(PaintBar());
+        if (_healthBarUpdate != null)
+        {
+            StopCoroutine(_healthBarUpdate);
+        }
 
+        _healthBarUpdate = StartCoroutine(PaintBar());
         _hitPointsValue.text = $"{_player.Health}/{_player.MaxHealth}";
     }
 
