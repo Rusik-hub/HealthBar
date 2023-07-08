@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int _damage = 10;
+    [SerializeField] private Player _player;
 
-    public int GetDamageValue()
+    private int _damage = 10;
+    private int _minDamage = 1;
+
+    public void HitPlayer()
     {
-        return _damage;
+        if (_damage > 0)
+            _player.TakeDamage(_damage);
+        else
+            _player.TakeDamage(_minDamage);
     }
 }

@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 11039049}
   m_Layer: 0
-  m_Name: ShowInteractionMenu
+  m_Name: InteractionMenuShower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,9 +668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e20fc8eec2a54ddabf00d39ee3b4428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 998786489}
-  _painter: {fileID: 0}
-  _healthIsChanged:
+  _painter: {fileID: 952205738}
+  _healthChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &826288630
@@ -1078,6 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e5533ae482f48f59f36bc868b1ed16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 770065399}
 --- !u!65 &998786490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1317,9 +1317,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 770065399}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: TakeDamage
+      - m_Target: {fileID: 998786489}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: HitPlayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1530,6 +1530,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3696354557974323922, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540229000190281644, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7c2658b3e2f0946218424f9f3ee6f677, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
 --- !u!1 &1406161491

@@ -5,12 +5,10 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemy;
     [SerializeField] private HealthBarPainter _painter;
     [SerializeField] private UnityEvent _healthChanged;
 
     private int _healValue = 10;
-    private int _minDamage = 1;
     private int _minHealValue = 1;
 
     public int Health { get; private set; }
@@ -28,14 +26,9 @@ public class Player : MonoBehaviour
         Health = MaxHealth;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        int damage = _enemy.GetDamageValue();
-
-        if (damage > 0)
-            Health -= damage;
-        else
-            Health -= _minDamage;
+        Health -= damage;
 
         if (Health < 0)
         {
